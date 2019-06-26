@@ -125,7 +125,7 @@ bool TEST_W_12(const SEARCH_SPACE &SP) {
 bool TEST_W_7_AND_W_8(const SEARCH_SPACE &SP) {
     DEL TEST_INPUT_1, TEST_INPUT_2;
 
-    G._init_carry_graph(vector<DEL>{SP.W[0], DASH_TEMPLATE});
+    G._init_carry_graph(vector<DEL>{SP.W[0], _K[7], DASH_TEMPLATE});
     G.COMPUTE_GRAPH();
     A_7 = G.compressed;
     E_7 = G.compressed;
@@ -262,6 +262,7 @@ bool FIND(const int &step, SEARCH_SPACE &SP, bool (*TEST_FUNCTION)(const SEARCH_
 
 bool search_SP(const SEARCH_SPACE &DC, SEARCH_SPACE &final_DC) {
     for (int index = 0; index < WORD_LENGTH; index++) DASH_TEMPLATE += "-";
+
     SEARCH_SPACE virtual_SP = DC;
 
     stack<search_checkpoint> W_7;
@@ -274,32 +275,6 @@ bool search_SP(const SEARCH_SPACE &DC, SEARCH_SPACE &final_DC) {
             while (FIND(2, virtual_SP, TEST_W_12, W_12)) {
                 if (FIND(3, virtual_SP, TEST_W_15, W_15)) {
                     final_DC = virtual_SP;
-
-                    G._init_carry_graph(vector<DEL>{"--x-----------------------------", DASH_TEMPLATE});
-                    G.COMPUTE_GRAPH();
-                    cout << DASH_TEMPLATE << endl;
-                    cout << G.compressed << endl;
-
-                    rev(A_7);
-                    rev(A_8);
-                    rev(A_9);
-                    rev(E_7);
-                    rev(E_8);
-                    rev(E_9);
-                    rev(E_10);
-                    rev(E_11);
-                    rev(E_12);
-                    rev(E_13);
-
-                    cout << A_7 << "\t" << E_7 << endl;
-                    cout << A_8 << "\t" << E_8 << endl;
-                    cout << A_9 << "\t" << E_9 << endl;
-
-                    cout << E_10 << endl;
-                    cout << E_11 << endl;
-                    cout << E_12 << endl;
-                    cout << E_13 << endl;
-                    return true;
                 }
             }
         }
