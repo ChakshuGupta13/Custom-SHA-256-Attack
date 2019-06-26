@@ -275,6 +275,27 @@ bool search_SP(const SEARCH_SPACE &DC, SEARCH_SPACE &final_DC) {
             while (FIND(2, virtual_SP, TEST_W_12, W_12)) {
                 if (FIND(3, virtual_SP, TEST_W_15, W_15)) {
                     final_DC = virtual_SP;
+
+                    rev(A_7);
+                    rev(A_8);
+                    rev(A_9);
+                    rev(E_7);
+                    rev(E_8);
+                    rev(E_9);
+                    rev(E_10);
+                    rev(E_11);
+                    rev(E_12);
+                    rev(E_13);
+
+                    cout << A_7 << "\t" << E_7 << endl;
+                    cout << A_8 << "\t" << E_8 << endl;
+                    cout << A_9 << "\t" << E_9 << endl;
+
+                    cout << E_10 << endl;
+                    cout << E_11 << endl;
+                    cout << E_12 << endl;
+                    cout << E_13 << endl;
+                    return true;
                 }
             }
         }
