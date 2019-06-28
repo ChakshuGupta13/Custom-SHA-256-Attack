@@ -12,16 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d68b4555-c471-49a9-8490-a9327b941a1c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/START_POINT/found_characteristics.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GLOBAL_CONSTANTS.h" beforeDir="false" afterPath="$PROJECT_DIR$/GLOBAL_CONSTANTS.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SHA256" beforeDir="false" afterPath="$PROJECT_DIR$/SHA256" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/START_POINT/asiacrypt11_27steps.txt" beforeDir="false" afterPath="$PROJECT_DIR$/START_POINT/asiacrypt11_27steps.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diff_chars.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/diff_chars.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diff_chars.h" beforeDir="false" afterPath="$PROJECT_DIR$/diff_chars.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/diff_chars.o" beforeDir="false" afterPath="$PROJECT_DIR$/diff_chars.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.o" beforeDir="false" afterPath="$PROJECT_DIR$/main.o" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,17 +27,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/diff_chars.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="30">
-              <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
+            <state relative-caret-position="-1803">
+              <caret line="2" column="33" lean-forward="true" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
               <folding>
                 <element signature="e#25#186#0" />
                 <element signature="e#188#302#0" />
                 <element signature="e#304#470#0" />
+                <element signature="e#635#1878#0" />
                 <element signature="e#1880#2423#0" />
                 <element signature="e#2425#3237#0" />
+                <element signature="e#3239#4479#0" />
+                <element signature="e#4481#4981#0" />
+                <element signature="e#4983#6412#0" />
               </folding>
             </state>
           </provider>
@@ -61,10 +56,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/diff_chars.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
+            <state relative-caret-position="-120">
               <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
               <folding>
                 <element signature="e#43#60#0" expanded="true" />
@@ -187,12 +182,12 @@
       <workItem from="1561446840238" duration="36816000" />
       <workItem from="1561608565053" duration="5427000" />
       <workItem from="1561642531968" duration="3529000" />
-      <workItem from="1561693915550" duration="5303000" />
+      <workItem from="1561693915550" duration="6826000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="51430000" />
+    <option name="totallyTimeSpent" value="52953000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="29" width="1368" height="740" extended-state="6" />
@@ -287,13 +282,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/START_POINT/asiacrypt11_27steps.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -301,26 +289,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/diff_chars.h">
+    <entry file="file://$PROJECT_DIR$/START_POINT/asiacrypt11_27steps.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
-          <folding>
-            <element signature="e#43#60#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="165">
+          <caret line="11" column="74" selection-start-line="11" selection-start-column="74" selection-end-line="11" selection-end-column="74" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/diff_chars.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="33" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
+        <state relative-caret-position="-1803">
+          <caret line="2" column="33" lean-forward="true" selection-start-line="2" selection-start-column="33" selection-end-line="2" selection-end-column="33" />
           <folding>
             <element signature="e#25#186#0" />
             <element signature="e#188#302#0" />
             <element signature="e#304#470#0" />
+            <element signature="e#635#1878#0" />
             <element signature="e#1880#2423#0" />
             <element signature="e#2425#3237#0" />
+            <element signature="e#3239#4479#0" />
+            <element signature="e#4481#4981#0" />
+            <element signature="e#4983#6412#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/diff_chars.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-120">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="24" selection-end-line="7" selection-end-column="24" />
+          <folding>
+            <element signature="e#43#60#0" expanded="true" />
           </folding>
         </state>
       </provider>

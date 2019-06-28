@@ -318,10 +318,9 @@ bool SPACE::PHASE_1() {
 }
 
 bool SEARCH(SPACE &space) {
-    while (!HISTORY.empty()) HISTORY.pop();
-
     SPACE TEMP_SPACE = space;
     while (!TEMP_SPACE.PHASE_1()) {
+        while (!HISTORY.empty()) HISTORY.pop();
         TEMP_SPACE = space;
         INCONSISTENCIES = 0;
     }
