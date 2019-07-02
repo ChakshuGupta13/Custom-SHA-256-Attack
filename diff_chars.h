@@ -1,27 +1,49 @@
 #ifndef DIFF_CHARS_H
 #define DIFF_CHARS_H
 
+#include <random>
+
 #include "carry_graph.h"
 
-#define WORDS_IN_SEARCH_SPACE 4
+int INCONSISTENCIES = 0;
 
-class SEARCH_SPACE {
+class SPACE {
 public:
-    DEL W[WORDS_IN_SEARCH_SPACE];
+    vector<DEL> A;
+    vector<DEL> E;
+    vector<DEL> W;
 
-    bool operator==(SEARCH_SPACE &DC) {
-        for (int index = 0; index < WORDS_IN_SEARCH_SPACE; index++)
-            if (DC.W[index] == this->W[index]) continue;
-            else return false;
+    /*
+     * MAX_ROUNDS: Specified in 1-based index.
+     */
+    int MAX_ROUNDS;
 
-        return true;
-    }
+    bool _init_(const string &INPUT_FILE_NAME);
+
+    bool operator==(SPACE &SPACE);
+
+    void print(const int &step);
+
+    void write(ofstream &out);
+
+    void _init_U();
+
+    bool PHASE_1();
+
+    bool SPACE_CONSISTENT(const int &step);
 };
 
-void print_SP(const int &step, const SEARCH_SPACE &SP, ostream &out = cout);
+struct search_checkpoint {
+    SPACE space;
+    char var{};
+    int step{};
+    int index{};
+    int choice{};
+};
 
-bool search_SP(const SEARCH_SPACE &DC, SEARCH_SPACE &final_DC);
+vector<pair<char, pair<int, int>>> U;
+stack<search_checkpoint> HISTORY;
 
-void _init_search_space(SEARCH_SPACE &);
+bool SEARCH(SPACE &);
 
 #endif //DIFF_CHARS_H

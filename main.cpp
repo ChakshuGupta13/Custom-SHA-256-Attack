@@ -10,22 +10,32 @@ void _init_() {
 }
 
 int main(int argc, char *argv[]) {
+    if (argc != 2){
+        cout << "Run: " << argv[0] << " <Characteristics File>\n";
+        return 0;
+    }
+
     srandom(time(nullptr));
 
     cout << "Initializing Global Matrices...\n";
     _init_();
 
-    SEARCH_SPACE searchSpace, finalSpace;
-    _init_search_space(searchSpace);
+    SPACE space;
+    cout << "Reading search space...\n";
+    if (space._init_(argv[1])) {
 
-    cout << "To begin the search for that differential characteristics: press Enter!" << endl;
-    getchar();
-    cout << "Searching..." << endl;
-    search_SP(searchSpace, finalSpace);
-    cout << "Found the characteristics!" << endl;
-    cout << "To print the found differential characteristics: press Enter!" << endl;
-    getchar();
-    print_SP(0, searchSpace);
+        cout << "Press 'Enter' to begin the search.\n";
+        getchar();
+        cout << "Searching...\n";
+        SEARCH(space);
+        cout << "Found the characteristics!\n";
+
+        cout << "Storing result...\n";
+        ofstream output_file("./START_POINT/found_characteristics.txt", ios::out | ios::trunc);
+        space.write(output_file);
+
+        output_file.close();
+    }
 
     return 0;
 }
