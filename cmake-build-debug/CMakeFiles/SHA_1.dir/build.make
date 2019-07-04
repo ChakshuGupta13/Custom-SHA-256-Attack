@@ -43,10 +43,10 @@ RM = /snap/clion/73/bin/cmake/linux/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/CLionProjects/Custom-SHA-256-Attack
+CMAKE_SOURCE_DIR = /home/chakshu/CLionProjects/Custom-SHA-256-Attack
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug
+CMAKE_BINARY_DIR = /home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SHA_1.dir/depend.make
@@ -59,68 +59,68 @@ include CMakeFiles/SHA_1.dir/flags.make
 
 CMakeFiles/SHA_1.dir/main.cpp.o: CMakeFiles/SHA_1.dir/flags.make
 CMakeFiles/SHA_1.dir/main.cpp.o: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SHA_1.dir/main.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/main.cpp.o -c /root/CLionProjects/Custom-SHA-256-Attack/main.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/SHA_1.dir/main.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/main.cpp.o -c /home/chakshu/CLionProjects/Custom-SHA-256-Attack/main.cpp
 
 CMakeFiles/SHA_1.dir/main.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SHA_1.dir/main.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/Custom-SHA-256-Attack/main.cpp > CMakeFiles/SHA_1.dir/main.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakshu/CLionProjects/Custom-SHA-256-Attack/main.cpp > CMakeFiles/SHA_1.dir/main.cpp.i
 
 CMakeFiles/SHA_1.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SHA_1.dir/main.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/Custom-SHA-256-Attack/main.cpp -o CMakeFiles/SHA_1.dir/main.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakshu/CLionProjects/Custom-SHA-256-Attack/main.cpp -o CMakeFiles/SHA_1.dir/main.cpp.s
 
 CMakeFiles/SHA_1.dir/SHA-256.cpp.o: CMakeFiles/SHA_1.dir/flags.make
 CMakeFiles/SHA_1.dir/SHA-256.cpp.o: ../SHA-256.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SHA_1.dir/SHA-256.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/SHA-256.cpp.o -c /root/CLionProjects/Custom-SHA-256-Attack/SHA-256.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/SHA_1.dir/SHA-256.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/SHA-256.cpp.o -c /home/chakshu/CLionProjects/Custom-SHA-256-Attack/SHA-256.cpp
 
 CMakeFiles/SHA_1.dir/SHA-256.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SHA_1.dir/SHA-256.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/Custom-SHA-256-Attack/SHA-256.cpp > CMakeFiles/SHA_1.dir/SHA-256.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakshu/CLionProjects/Custom-SHA-256-Attack/SHA-256.cpp > CMakeFiles/SHA_1.dir/SHA-256.cpp.i
 
 CMakeFiles/SHA_1.dir/SHA-256.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SHA_1.dir/SHA-256.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/Custom-SHA-256-Attack/SHA-256.cpp -o CMakeFiles/SHA_1.dir/SHA-256.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakshu/CLionProjects/Custom-SHA-256-Attack/SHA-256.cpp -o CMakeFiles/SHA_1.dir/SHA-256.cpp.s
 
 CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.o: CMakeFiles/SHA_1.dir/flags.make
 CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.o: ../difference_propagation_tables.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.o -c /root/CLionProjects/Custom-SHA-256-Attack/difference_propagation_tables.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.o -c /home/chakshu/CLionProjects/Custom-SHA-256-Attack/difference_propagation_tables.cpp
 
 CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/Custom-SHA-256-Attack/difference_propagation_tables.cpp > CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakshu/CLionProjects/Custom-SHA-256-Attack/difference_propagation_tables.cpp > CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.i
 
 CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/Custom-SHA-256-Attack/difference_propagation_tables.cpp -o CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakshu/CLionProjects/Custom-SHA-256-Attack/difference_propagation_tables.cpp -o CMakeFiles/SHA_1.dir/difference_propagation_tables.cpp.s
 
 CMakeFiles/SHA_1.dir/diff_chars.cpp.o: CMakeFiles/SHA_1.dir/flags.make
 CMakeFiles/SHA_1.dir/diff_chars.cpp.o: ../diff_chars.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SHA_1.dir/diff_chars.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/diff_chars.cpp.o -c /root/CLionProjects/Custom-SHA-256-Attack/diff_chars.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/SHA_1.dir/diff_chars.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/diff_chars.cpp.o -c /home/chakshu/CLionProjects/Custom-SHA-256-Attack/diff_chars.cpp
 
 CMakeFiles/SHA_1.dir/diff_chars.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SHA_1.dir/diff_chars.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/Custom-SHA-256-Attack/diff_chars.cpp > CMakeFiles/SHA_1.dir/diff_chars.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakshu/CLionProjects/Custom-SHA-256-Attack/diff_chars.cpp > CMakeFiles/SHA_1.dir/diff_chars.cpp.i
 
 CMakeFiles/SHA_1.dir/diff_chars.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SHA_1.dir/diff_chars.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/Custom-SHA-256-Attack/diff_chars.cpp -o CMakeFiles/SHA_1.dir/diff_chars.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakshu/CLionProjects/Custom-SHA-256-Attack/diff_chars.cpp -o CMakeFiles/SHA_1.dir/diff_chars.cpp.s
 
 CMakeFiles/SHA_1.dir/carry_graph.cpp.o: CMakeFiles/SHA_1.dir/flags.make
 CMakeFiles/SHA_1.dir/carry_graph.cpp.o: ../carry_graph.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SHA_1.dir/carry_graph.cpp.o"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/carry_graph.cpp.o -c /root/CLionProjects/Custom-SHA-256-Attack/carry_graph.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/SHA_1.dir/carry_graph.cpp.o"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/SHA_1.dir/carry_graph.cpp.o -c /home/chakshu/CLionProjects/Custom-SHA-256-Attack/carry_graph.cpp
 
 CMakeFiles/SHA_1.dir/carry_graph.cpp.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/SHA_1.dir/carry_graph.cpp.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /root/CLionProjects/Custom-SHA-256-Attack/carry_graph.cpp > CMakeFiles/SHA_1.dir/carry_graph.cpp.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/chakshu/CLionProjects/Custom-SHA-256-Attack/carry_graph.cpp > CMakeFiles/SHA_1.dir/carry_graph.cpp.i
 
 CMakeFiles/SHA_1.dir/carry_graph.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/SHA_1.dir/carry_graph.cpp.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /root/CLionProjects/Custom-SHA-256-Attack/carry_graph.cpp -o CMakeFiles/SHA_1.dir/carry_graph.cpp.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/chakshu/CLionProjects/Custom-SHA-256-Attack/carry_graph.cpp -o CMakeFiles/SHA_1.dir/carry_graph.cpp.s
 
 # Object files for target SHA_1
 SHA_1_OBJECTS = \
@@ -140,7 +140,7 @@ SHA_1: CMakeFiles/SHA_1.dir/diff_chars.cpp.o
 SHA_1: CMakeFiles/SHA_1.dir/carry_graph.cpp.o
 SHA_1: CMakeFiles/SHA_1.dir/build.make
 SHA_1: CMakeFiles/SHA_1.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable SHA_1"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable SHA_1"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SHA_1.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -153,6 +153,6 @@ CMakeFiles/SHA_1.dir/clean:
 .PHONY : CMakeFiles/SHA_1.dir/clean
 
 CMakeFiles/SHA_1.dir/depend:
-	cd /root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/CLionProjects/Custom-SHA-256-Attack /root/CLionProjects/Custom-SHA-256-Attack /root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug /root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug /root/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles/SHA_1.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/chakshu/CLionProjects/Custom-SHA-256-Attack /home/chakshu/CLionProjects/Custom-SHA-256-Attack /home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug /home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug /home/chakshu/CLionProjects/Custom-SHA-256-Attack/cmake-build-debug/CMakeFiles/SHA_1.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/SHA_1.dir/depend
 

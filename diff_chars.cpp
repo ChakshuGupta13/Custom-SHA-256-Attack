@@ -325,7 +325,5 @@ bool SEARCH(SPACE &space) {
         INCONSISTENCIES = 0;
     }
     space = TEMP_SPACE;
-}
-
-    return false;
+    return true;
 }
