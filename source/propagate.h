@@ -1,4 +1,9 @@
-#include "difference_propagation_tables.h"
+#ifndef DIFFERENCE_PROPAGATION_TABLES_H
+#define DIFFERENCE_PROPAGATION_TABLES_H
+
+#include "sha-256.h"
+
+vector<pair<bool, bool> > index_to_config(int idx);
 
 char diff_bit_render_1[2][2][2][2];
 char diff_bit_render_2[16];
@@ -12,6 +17,17 @@ map<pair<string, string>, string> tighten;
 int tighten_matrix[16][16];
 
 int DEL_IF_DP[16][16][16], DEL_MAJ_DP[16][16][16], DEL_XOR_DP[16][16][16];
+
+int config_to_index(const set<pair<bool, bool>> &conditions_intersection) {
+    vector<bool> index(4);
+
+    if (conditions_intersection.count(make_pair(0, 0)) > 0) index[0] = true;
+    if (conditions_intersection.count(make_pair(1, 0)) > 0) index[1] = true;
+    if (conditions_intersection.count(make_pair(0, 1)) > 0) index[2] = true;
+    if (conditions_intersection.count(make_pair(1, 1)) > 0) index[3] = true;
+
+    return diff_bit_index[index[0]][index[1]][index[2]][index[3]];
+}
 
 void _init_tighten_matrix() {
     for (int row = 0; row < 16; row++)
@@ -140,17 +156,6 @@ void _init_DEL_IF_MAJ_XOR_DP() {
             }
 }
 
-int config_to_index(const set<pair<bool, bool>> &conditions_intersection) {
-    vector<bool> index(4);
-
-    if (conditions_intersection.count(make_pair(0, 0)) > 0) index[0] = true;
-    if (conditions_intersection.count(make_pair(1, 0)) > 0) index[1] = true;
-    if (conditions_intersection.count(make_pair(0, 1)) > 0) index[2] = true;
-    if (conditions_intersection.count(make_pair(1, 1)) > 0) index[3] = true;
-
-    return diff_bit_index[index[0]][index[1]][index[2]][index[3]];
-}
-
 vector<pair<bool, bool>> index_to_config(int diff_bit) {
     assert((0 <= diff_bit) && (diff_bit < 16));
 
@@ -269,7 +274,7 @@ DEL SHIFT__RIGHT_WORD(DEL x, int offset){
     return out;
 }
 
-DEL GET_TIGHTEN_WORD(string x1, string x2, const int num_bits) {
+DEL GET_TIGHTEN_WORD(string x1, string x2, const int num_bits = WORD_LENGTH) {
     if (tighten.count(make_pair(x1, x2)) > 0) return tighten[make_pair(x1, x2)];
 
     string out;
@@ -367,3 +372,5 @@ DEL GET_DEL_SMALL_SIGMA_1(const DEL &in) {
     SMALL_SIGMA_1[in] = DEL_XOR;
     return SMALL_SIGMA_1[in];
 }
+
+#endif //DIFFERENCE_PROPAGATION_TABLES_H

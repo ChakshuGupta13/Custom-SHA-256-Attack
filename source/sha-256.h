@@ -1,4 +1,10 @@
-#include "SHA-256.h"
+#ifndef SHA256_H
+#define SHA256_H
+
+#include "global_const.h"
+#include "propagate.h"
+
+using namespace std;
 
 const WORD K[TOTAL_NUM_ROUNDS] = {
         0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5,
@@ -18,3 +24,5 @@ void _init_DEL_K() {
         rev(_K[step]);
     }
 }
+
+#endif //SHA256_H

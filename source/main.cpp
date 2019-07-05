@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         cout << "Found the characteristics!\n";
 
         cout << "Storing result...\n";
-        ofstream output_file("./START_POINT/found_characteristics.txt", ios::out | ios::trunc);
+        ofstream output_file("./start_points/found_characteristics.txt", ios::out | ios::trunc);
         space.write(output_file);
 
         output_file.close();

@@ -1,8 +1,28 @@
 #include <utility>
 
-#include <utility>
+#ifndef CARRY_GRAPH_H
+#define CARRY_GRAPH_H
 
-#include "carry_graph.h"
+#include "propagate.h"
+
+class CARRY_GRAPH {
+    map<CARRY_GRAPH_NODE, int> node_to_index;
+    map<int, CARRY_GRAPH_NODE> index_to_node;
+    vector<vector<int>> adjList;
+
+    vector<DEL> ADDENDS;
+public:
+    DEL compressed;
+
+    void _init_carry_graph(vector<DEL>, int num_bits = WORD_LENGTH);
+
+    void COMPUTE_GRAPH();
+
+    void CLEAR_GRAPH() {
+        ADDENDS.clear();
+        compressed = "";
+    }
+};
 
 void CARRY_GRAPH::_init_carry_graph(vector<DEL> addends, const int num_bits) {
     ADDENDS = std::move(addends);
@@ -94,3 +114,5 @@ void CARRY_GRAPH::COMPUTE_GRAPH() {
 
     for (int bit = 0; bit < WORD_LENGTH; bit++) compressed[bit] = diff_bit_render_2[config_to_index(allow_bit_config[bit])];
 }
+
+#endif //CARRY_GRAPH_H

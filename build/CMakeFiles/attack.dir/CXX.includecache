@@ -1,0 +1,38 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/carry_graph.h
+utility
+-
+propagate.h
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/propagate.h
+
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/diff_chars.h
+random
+-
+carry_graph.h
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/carry_graph.h
+
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/global_const.h
+bits/stdc++.h
+-
+
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/main.cpp
+diff_chars.h
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/diff_chars.h
+
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/propagate.h
+sha-256.h
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/sha-256.h
+
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/sha-256.h
+global_const.h
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/global_const.h
+propagate.h
+/home/chakshu/CLionProjects/Custom-SHA-256-Attack/source/propagate.h
+
