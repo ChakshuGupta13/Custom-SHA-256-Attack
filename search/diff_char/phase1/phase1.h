@@ -3,7 +3,7 @@
 
 #include <random>
 
-#include "carry_graph.h"
+#include "../../../source/carry_graph.h"
 
 #define MAX_INCONSISTENCIES 10000
 

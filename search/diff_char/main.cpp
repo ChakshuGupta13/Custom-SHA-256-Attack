@@ -1,4 +1,4 @@
-#include "diff_chars.h"
+#include "phase1/phase1.h"
 
 void _init_() {
     _init_diff_bit_render_s();
