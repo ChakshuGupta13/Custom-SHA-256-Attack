@@ -8,141 +8,29 @@
 #define MAX_INCONSISTENCIES 10000
 
 int INCONSISTENCIES = 0;
+//    shuffle(U.begin(), U.end(), std::mt19937(std::random_device()()));
 
-class SPACE {
+class bit_loc {
 public:
-    vector<DEL> A;
-    vector<DEL> E;
-    vector<DEL> W;
+    char state_var;
+    int step;
+    int index;
 
-    /*
-     * MAX_ROUNDS: Specified in 1-based index.
-     */
+    bool operator == (bit_loc bitLoc) {
+        return bitLoc.state_var == state_var && bitLoc.step == step && bitLoc.index == index;
+    }
+};
+
+class CHAR {
+public:
+    vector<DEL> A, E, W;
     int MAX_ROUNDS;
 
-    bool _init_(const string &INPUT_FILE_NAME);
-
-    bool operator==(SPACE &SPACE);
-
     void print(const int &step);
-
-    void write(ofstream &out);
-
-    void _init_U();
-
-    bool PHASE_1();
-
-    bool SPACE_CONSISTENT(const int &);
 };
 
-struct search_checkpoint {
-    SPACE space;
-    char var{};
-    int step{};
-    int index{};
-    int choice{};
-};
-
-vector<pair<char, pair<int, int>>> U;
-stack<search_checkpoint> HISTORY;
-
-bool HEAD_OCCUR() {
-    random_device r;
-    default_random_engine e1(r());
-    uniform_int_distribution<int> uniform_dist(0, 1);
-
-    return uniform_dist(e1);
-}
-
-bool CONSISTENT(const DEL &in) {
-    for (char bit : in)
-        if (bit == '#') return false;
-
-    return true;
-}
-
-void CHANGE_1(DEL &in, const int &index) {
-    if (in[index] == '?') in[index] = '-';
-    else if (HEAD_OCCUR() % 2 == 0) in[index] = 'u';
-    else in[index] = 'n';
-}
-
-bool SPACE::_init_(const string &INPUT_FILE_NAME) {
-    std::ifstream input_file;
-    input_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-    try {
-        input_file.open(INPUT_FILE_NAME);
-
-        INCONSISTENCIES = 0;
-
-        input_file >> MAX_ROUNDS;
-        A.resize(MAX_ROUNDS + IV_OFFSET);
-        E.resize(MAX_ROUNDS + IV_OFFSET);
-        W.resize(MAX_ROUNDS);
-
-        for (int index = -IV_OFFSET; index < 0; index++) {
-            input_file >> A[(MAX_ROUNDS - 1) + (-index)];
-            std::reverse(A[(MAX_ROUNDS - 1) + (-index)].begin(), A[(MAX_ROUNDS - 1) + (-index)].end());
-
-            input_file >> E[(MAX_ROUNDS - 1) + (-index)];
-            std::reverse(E[(MAX_ROUNDS - 1) + (-index)].begin(), E[(MAX_ROUNDS - 1) + (-index)].end());
-        }
-
-        for (int index = 0; index < MAX_ROUNDS; index++) {
-            input_file >> A[index] >> E[index] >> W[index];
-            std::reverse(A[index].begin(), A[index].end());
-            std::reverse(E[index].begin(), E[index].end());
-            std::reverse(W[index].begin(), W[index].end());
-        }
-
-        input_file.close();
-
-        return true;
-
-    } catch (std::ifstream::failure &fail) {
-        std::cerr << "Exception opening input file.\n";
-    }
-
-    return false;
-}
-
-bool SPACE::operator==(SPACE &SPACE) {
-    for (int index = -IV_OFFSET; index < 0; index++)
-        if ((A[(MAX_ROUNDS - 1) + (-index)] == SPACE.A[(MAX_ROUNDS - 1) + (-index)]) && (E[(MAX_ROUNDS - 1) + (-index)] == SPACE.E[(MAX_ROUNDS - 1) + (-index)]))
-            continue;
-        else
-            return false;
-
-    for (int index = 0; index < MAX_ROUNDS; index++)
-        if ((A[index] == SPACE.A[index]) && (E[index] == SPACE.E[index]) && (W[index] == SPACE.W[index]))
-            continue;
-        else return false;
-
-    return true;
-}
-
-void SPACE::write(ofstream &out) {
-    for (int index = -IV_OFFSET; index < 0; index++) {
-        std::reverse(A[(MAX_ROUNDS - 1) + (-index)].begin(), A[(MAX_ROUNDS - 1) + (-index)].end());
-        out << "-" << setw(2) << setfill('0') << -index << ": " << A[(MAX_ROUNDS - 1) + (-index)] << " ";
-
-        std::reverse(E[(MAX_ROUNDS - 1) + (-index)].begin(), E[(MAX_ROUNDS - 1) + (-index)].end());
-        out << E[(MAX_ROUNDS - 1) + (-index)] << "\n";
-    }
-
-    for (int index = 0; index < MAX_ROUNDS; index++) {
-        std::reverse(A[index].begin(), A[index].end());
-        std::reverse(E[index].begin(), E[index].end());
-        std::reverse(W[index].begin(), W[index].end());
-
-        out << "+" << setw(2) << setfill('0') << index << ": " << A[index] << " " << E[index] << " " << W[index] << "\n";
-    }
-}
-
-void SPACE::print(const int &step) {
+void CHAR::print(const int &step) {
     cout << "\033[2J\033[1;1H";
-    cout << "TOTAL INCONSISTENCIES: " << INCONSISTENCIES << "\n";
 
     int index;
     DEL temp;
@@ -183,179 +71,363 @@ void SPACE::print(const int &step) {
     }
 }
 
-void SPACE::_init_U() {
-    U.clear();
-    for (int index = 0; index < MAX_ROUNDS; index++) {
-        for (int bit = 0; bit < WORD_LENGTH; bit++) {
-            if (A[index][bit] == '?' || A[index][bit] == 'x') U.emplace_back('A', make_pair(index, bit));
-            if (E[index][bit] == '?' || E[index][bit] == 'x')  U.emplace_back('E', make_pair(index, bit));
-            if (W[index][bit] == '?' || W[index][bit] == 'x')  U.emplace_back('W', make_pair(index, bit));
-        }
-    }
-    shuffle(U.begin(), U.end(), std::mt19937(std::random_device()()));
+class SPACE {
+public:
+    // MAX_ROUNDS: Specified in 1-based index.
+    CHAR space;
+    vector<pair<bit_loc, vector<char>>> loose_bits, bound_bits;
+
+    bool _init_(const string &INPUT_FILE_NAME);
+
+    bool operator==(SPACE &SPACE);
+
+    void write(ofstream &out);
+
+    void _init_U();
+
+    bool PHASE_1();
+
+    bool SPACE_CONSISTENT();
+};
+
+stack<bit_loc> HISTORY;
+
+bool HEAD_OCCUR() {
+    random_device r;
+    default_random_engine e1(r());
+    uniform_int_distribution<int> uniform_dist(0, 1);
+
+    return uniform_dist(e1);
 }
 
-bool SPACE::SPACE_CONSISTENT(const int &round) {
+bool CONSISTENT(const DEL &in) {
+    for (char bit : in)
+        if (bit == '#') return false;
+
+    return true;
+}
+
+void CHANGE_1(DEL &in, const int &index) {
+    if (in[index] == '?') in[index] = '-';
+    else if (HEAD_OCCUR() % 2 == 0) in[index] = 'u';
+    else in[index] = 'n';
+}
+
+bool SPACE::_init_(const string &INPUT_FILE_NAME) {
+    std::ifstream input_file;
+    input_file.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+    try {
+        input_file.open(INPUT_FILE_NAME);
+
+        INCONSISTENCIES = 0;
+
+        input_file >> space.MAX_ROUNDS;
+        space.A.resize(space.MAX_ROUNDS + IV_OFFSET);
+        space.E.resize(space.MAX_ROUNDS + IV_OFFSET);
+        space.W.resize(space.MAX_ROUNDS);
+
+        for (int index = -IV_OFFSET; index < 0; index++) {
+            input_file >> space.A[(space.MAX_ROUNDS - 1) + (-index)];
+            std::reverse(space.A[(space.MAX_ROUNDS - 1) + (-index)].begin(), space.A[(space.MAX_ROUNDS - 1) + (-index)].end());
+
+            input_file >> space.E[(space.MAX_ROUNDS - 1) + (-index)];
+            std::reverse(space.E[(space.MAX_ROUNDS - 1) + (-index)].begin(), space.E[(space.MAX_ROUNDS - 1) + (-index)].end());
+        }
+
+        for (int index = 0; index < space.MAX_ROUNDS; index++) {
+            input_file >> space.A[index] >> space.E[index] >> space.W[index];
+            std::reverse(space.A[index].begin(), space.A[index].end());
+            std::reverse(space.E[index].begin(), space.E[index].end());
+            std::reverse(space.W[index].begin(), space.W[index].end());
+        }
+
+        input_file.close();
+
+        return true;
+
+    } catch (std::ifstream::failure &fail) {
+        std::cerr << "Exception happened while opening input file.\n";
+    }
+
+    return false;
+}
+
+bool SPACE::operator==(SPACE &SPACE) {
+    for (int index = -IV_OFFSET; index < 0; index++)
+        if ((space.A[(space.MAX_ROUNDS - 1) + (-index)] == SPACE.space.A[(space.MAX_ROUNDS - 1) + (-index)]) &&
+            (space.E[(space.MAX_ROUNDS - 1) + (-index)] == SPACE.space.E[(space.MAX_ROUNDS - 1) + (-index)]))
+            continue;
+        else
+            return false;
+
+    for (int index = 0; index < space.MAX_ROUNDS; index++)
+        if ((space.A[index] == SPACE.space.A[index]) &&
+        (space.E[index] == SPACE.space.E[index]) &&
+        (space.W[index] == SPACE.space.W[index]))
+            continue;
+        else return false;
+
+    return true;
+}
+
+void SPACE::write(ofstream &out) {
+    for (int index = -IV_OFFSET; index < 0; index++) {
+        std::reverse(space.A[(space.MAX_ROUNDS - 1) + (-index)].begin(), space.A[(space.MAX_ROUNDS - 1) + (-index)].end());
+        out << "-" << setw(2) << setfill('0') << -index << ": " << space.A[(space.MAX_ROUNDS - 1) + (-index)] << " ";
+
+        std::reverse(space.E[(space.MAX_ROUNDS - 1) + (-index)].begin(), space.E[(space.MAX_ROUNDS - 1) + (-index)].end());
+        out << space.E[(space.MAX_ROUNDS - 1) + (-index)] << "\n";
+    }
+
+    for (int index = 0; index < space.MAX_ROUNDS; index++) {
+        std::reverse(space.A[index].begin(), space.A[index].end());
+        std::reverse(space.E[index].begin(), space.E[index].end());
+        std::reverse(space.W[index].begin(), space.W[index].end());
+
+        out << "+" << setw(2) << setfill('0') << index << ": " << space.A[index] << " " << space.E[index] << " " << space.W[index]
+            << "\n";
+    }
+}
+
+void SPACE::_init_U() {
+    for (int step = 0; step < space.MAX_ROUNDS; step++) {
+        for (int index = 0; index < WORD_LENGTH; index++) {
+            if (space.A[step][index] == '?' || space.A[step][index] == 'x')
+                loose_bits.emplace_back(bit_loc{'A', step, index}, vector<char>{space.A[step][index]});
+            if (space.E[step][index] == '?' || space.E[step][index] == 'x')
+                loose_bits.emplace_back(bit_loc{'E', step, index}, vector<char>{space.E[step][index]});
+            if (space.W[step][index] == '?' || space.W[step][index] == 'x')
+                loose_bits.emplace_back(bit_loc{'W', step, index}, vector<char>{space.W[step][index]});
+        }
+    }
+}
+
+bool SPACE::SPACE_CONSISTENT() {
     CARRY_GRAPH G;
     DEL new_W, new_E, new_A;
+    CHAR new_space = space;
 
-    for (int step = round; step < MAX_ROUNDS; step++) {
+    for (int step = 0; step < space.MAX_ROUNDS; step++) {
         if (step >= 16) {
-            G._init_carry_graph(vector<DEL>{GET_DEL_SMALL_SIGMA_1(W[step - 2]), W[step - 7], GET_DEL_SMALL_SIGMA_0(W[step - 15]), W[step - 16]});
+            G._init_carry_graph(vector<DEL>{GET_DEL_SMALL_SIGMA_1(new_space.W[step - 2]),
+                                            new_space.W[step - 7],
+                                            GET_DEL_SMALL_SIGMA_0(new_space.W[step - 15]),
+                                            new_space.W[step - 16]});
             G.COMPUTE_GRAPH();
-            new_W = GET_TIGHTEN_WORD(G.compressed, W[step]);
-            if (!CONSISTENT(new_W))
-                return false;
+            new_W = GET_TIGHTEN_WORD(G.compressed, new_space.W[step]);
+            if (!CONSISTENT(new_W)) return false;
             G.CLEAR_GRAPH();
-        } else new_W = W[step];
+        } else new_W = new_space.W[step];
 
-        int stepm4 = ((step - 4) < 0)?(MAX_ROUNDS - 1 - (step - 4)): (step - 4);
-        int stepm3 = ((step - 3) < 0)?(MAX_ROUNDS - 1 - (step - 3)): (step - 3);
-        int stepm2 = ((step - 2) < 0)?(MAX_ROUNDS - 1 - (step - 2)): (step - 2);
-        int stepm1 = ((step - 1) < 0)?(MAX_ROUNDS - 1 - (step - 1)): (step - 1);
-        G._init_carry_graph(vector<DEL>{E[stepm4], GET_DEL_SIGMA_1(E[stepm1]), GET_DEL_IF__WORD(E[stepm1], E[stepm2], E[stepm3]), _K[step], new_W});
+        int stepm4 = ((step - 4) < 0) ? (space.MAX_ROUNDS - 1 - (step - 4)) : (step - 4);
+        int stepm3 = ((step - 3) < 0) ? (space.MAX_ROUNDS - 1 - (step - 3)) : (step - 3);
+        int stepm2 = ((step - 2) < 0) ? (space.MAX_ROUNDS - 1 - (step - 2)) : (step - 2);
+        int stepm1 = ((step - 1) < 0) ? (space.MAX_ROUNDS - 1 - (step - 1)) : (step - 1);
+        G._init_carry_graph(vector<DEL>{new_space.E[stepm4],
+                                        GET_DEL_SIGMA_1(new_space.E[stepm1]),
+                                        GET_DEL_IF__WORD(new_space.E[stepm1], new_space.E[stepm2], new_space.E[stepm3]),
+                                        _K[step],
+                                        new_W});
         G.COMPUTE_GRAPH();
         new_E = G.compressed;
         G.CLEAR_GRAPH();
 
-        G._init_carry_graph(vector<DEL>{GET_DEL_SIGMA_0(A[stepm1]), GET_DEL_MAJ_WORD(A[stepm1], A[stepm2], A[stepm3]), new_E});
+        G._init_carry_graph(vector<DEL>{GET_DEL_SIGMA_0(new_space.A[stepm1]),
+                                        GET_DEL_MAJ_WORD(new_space.A[stepm1], new_space.A[stepm2], new_space.A[stepm3]),
+                                        new_E});
         G.COMPUTE_GRAPH();
-        new_A = GET_TIGHTEN_WORD(G.compressed, A[step]);
+        new_A = GET_TIGHTEN_WORD(G.compressed, new_space.A[step]);
         if (!CONSISTENT(new_A)) return false;
         G.CLEAR_GRAPH();
 
         G._init_carry_graph(vector<DEL>{new_A, new_E});
         G.COMPUTE_GRAPH();
-        new_E = GET_TIGHTEN_WORD(G.compressed, E[step]);
+        new_E = GET_TIGHTEN_WORD(G.compressed, new_space.E[step]);
         if (!CONSISTENT(new_E)) return false;
         G.CLEAR_GRAPH();
 
-        W[step] = new_W;
-        E[step] = new_E;
-        A[step] = new_A;
+        new_space.W[step] = new_W;
+        new_space.E[step] = new_E;
+        new_space.A[step] = new_A;
 
-        print(step);
+        new_space.print(step);
     }
 
-    _init_U();
     return true;
 }
 
 bool SPACE::PHASE_1() {
-    search_checkpoint searchCheckpoint;
-    searchCheckpoint.space = *this;
-    searchCheckpoint.var = '#';
-    searchCheckpoint.step = MAX_ROUNDS;
-    searchCheckpoint.index = WORD_LENGTH;
-    searchCheckpoint.choice = 0;
-
-    HISTORY.push(searchCheckpoint);
-
     _init_U();
 
-    while (!U.empty()) {
+    while (!loose_bits.empty()) {
+        std::random_device device;
+        std::mt19937 generator(device());
+        std::uniform_int_distribution<int> distribution(0, loose_bits.size() - 1);
 
-        searchCheckpoint.var = (*U.begin()).first;
-        searchCheckpoint.step = (*U.begin()).second.first;
-        searchCheckpoint.index = (*U.begin()).second.second;
-
-        U.erase(U.begin());
+        auto iter = loose_bits.begin();
+        int times = distribution(generator);
+        while (times--) iter++;
+        bit_loc bitLoc = iter->first;
         char change;
 
-        switch (searchCheckpoint.var) {
+        switch (bitLoc.state_var) {
             case 'W': {
-                CHANGE_1(W[searchCheckpoint.step], searchCheckpoint.index);
-                change = W[searchCheckpoint.step][searchCheckpoint.index];
+                CHANGE_1(space.W[bitLoc.step], bitLoc.index);
+                change = space.W[bitLoc.step][bitLoc.index];
                 break;
             }
             case 'E': {
-                CHANGE_1(E[searchCheckpoint.step], searchCheckpoint.index);
-                change = E[searchCheckpoint.step][searchCheckpoint.index];
+                CHANGE_1(space.E[bitLoc.step], bitLoc.index);
+                change = space.E[bitLoc.step][bitLoc.index];
                 break;
             }
             case 'A': {
-                CHANGE_1(A[searchCheckpoint.step], searchCheckpoint.index);
-                change = A[searchCheckpoint.step][searchCheckpoint.index];
+                CHANGE_1(space.A[bitLoc.step], bitLoc.index);
+                change = space.A[bitLoc.step][bitLoc.index];
                 break;
             }
-            default:
-                return false;
+            default: return false;
         }
+        iter->second.push_back(change);
 
-        searchCheckpoint.choice = 1;
-
-        if (SPACE_CONSISTENT(searchCheckpoint.step)) {
-            searchCheckpoint.space = *this;
-            HISTORY.push(searchCheckpoint);
+        if (SPACE_CONSISTENT()) {
+            if (change == '-' || change == 'u' || change == 'n') {
+                bound_bits.push_back(*iter);
+                loose_bits.erase(iter);
+            }
+            HISTORY.push(bitLoc);
             continue;
         }
 
-        if (++INCONSISTENCIES >= MAX_INCONSISTENCIES)
-            return false;
-
-        *this = HISTORY.top().space;
-        change = (change == '-')?'x':((change == 'u')?'n':'u');
-        switch (searchCheckpoint.var) {
+        change = (change == '-') ? 'x' : ((change == 'u') ? 'n' : 'u');
+        switch (bitLoc.state_var) {
             case 'W': {
-                W[searchCheckpoint.step][searchCheckpoint.index] = change;
+                space.W[bitLoc.step][bitLoc.index] = change;
                 break;
             }
             case 'E': {
-                E[searchCheckpoint.step][searchCheckpoint.index] = change;
+                space.E[bitLoc.step][bitLoc.index] = change;
                 break;
             }
             case 'A': {
-                A[searchCheckpoint.step][searchCheckpoint.index] = change;
+                space.A[bitLoc.step][bitLoc.index] = change;
                 break;
             }
-            default:
-                return false;
+            default: return false;
         }
-        searchCheckpoint.choice = 2;
+        iter->second.push_back(change);
 
-        if (SPACE_CONSISTENT(searchCheckpoint.step)) {
-            searchCheckpoint.space = *this;
-            HISTORY.push(searchCheckpoint);
+        if (SPACE_CONSISTENT()) {
+            if (change == '-' || change == 'u' || change == 'n') {
+                bound_bits.push_back(*iter);
+                loose_bits.erase(iter);
+            }
+            HISTORY.push(bitLoc);
             continue;
         }
 
         do {
-            if (++INCONSISTENCIES >= MAX_INCONSISTENCIES)
-                return false;
+            bitLoc = HISTORY.top();
+            bool loose_bit = false;
+            for (iter = loose_bits.begin(); iter != loose_bits.end(); iter++) {
+                if (iter->first == bitLoc) {
+                    loose_bit = true;
+                    switch (bitLoc.state_var) {
+                        case 'W': {
+                            space.W[bitLoc.step][bitLoc.index] = '?';
+                            break;
+                        }
+                        case 'E': {
+                            space.E[bitLoc.step][bitLoc.index] = '?';
+                            break;
+                        }
+                        case 'A': {
+                            space.A[bitLoc.step][bitLoc.index] = '?';
+                            break;
+                        }
+                        default: return false;
+                    }
 
-            while (HISTORY.top().choice == 2) {
-                HISTORY.pop();
-                if (HISTORY.empty()) return false;
+                    iter->second.clear();
+                    iter->second.push_back('?');
+
+                    HISTORY.pop();
+                    break;
+                }
+            }
+            if (!loose_bit) {
+                for (iter = bound_bits.begin(); iter != bound_bits.end(); iter++) {
+                    if (iter->first == bitLoc) break;
+                }
+                if (iter->second[iter->second.size() - 1] == '-') {
+                    switch (bitLoc.state_var) {
+                        case 'W': {
+                            space.W[bitLoc.step][bitLoc.index] = 'x';
+                            break;
+                        }
+                        case 'E': {
+                            space.E[bitLoc.step][bitLoc.index] = 'x';
+                            break;
+                        }
+                        case 'A': {
+                            space.A[bitLoc.step][bitLoc.index] = 'x';
+                            break;
+                        }
+                        default: return false;
+                    }
+
+                    iter->second.push_back('x');
+                    loose_bits.push_back(*iter);
+                    bound_bits.erase(iter);
+                } else if (iter->second[iter->second.size() - 2] != 'x') {
+                    switch (bitLoc.state_var) {
+                        case 'W': {
+                            space.W[bitLoc.step][bitLoc.index] = '?';
+                            break;
+                        }
+                        case 'E': {
+                            space.E[bitLoc.step][bitLoc.index] = '?';
+                            break;
+                        }
+                        case 'A': {
+                            space.A[bitLoc.step][bitLoc.index] = '?';
+                            break;
+                        }
+                        default: return false;
+                    }
+
+                    iter->second.clear();
+                    iter->second.push_back('?');
+                    loose_bits.push_back(*iter);
+                    bound_bits.erase(iter);
+
+                    HISTORY.pop();
+                } else {
+                    change = (iter->second[iter->second.size() - 2] == 'u')?'n':'u';
+
+                    switch (bitLoc.state_var) {
+                        case 'W': {
+                            space.W[bitLoc.step][bitLoc.index] = change;
+                            break;
+                        }
+                        case 'E': {
+                            space.E[bitLoc.step][bitLoc.index] = change;
+                            break;
+                        }
+                        case 'A': {
+                            space.A[bitLoc.step][bitLoc.index] = change;
+                            break;
+                        }
+                        default: return false;
+                    }
+
+                    iter->second.push_back(change);
+                }
             }
 
-            searchCheckpoint = HISTORY.top();
-            HISTORY.pop();
-            switch (searchCheckpoint.var) {
-                case 'W': {
-                    change = searchCheckpoint.space.W[searchCheckpoint.step][searchCheckpoint.index];
-                    change = (change == '-')?'x':((change == 'u')?'n':'u');
-                    searchCheckpoint.space.W[searchCheckpoint.step][searchCheckpoint.index] = change;
-                    break;
-                }
-                case 'E': {
-                    change = searchCheckpoint.space.E[searchCheckpoint.step][searchCheckpoint.index];
-                    change = (change == '-')?'x':((change == 'u')?'n':'u');
-                    searchCheckpoint.space.E[searchCheckpoint.step][searchCheckpoint.index] = change;
-                    break;
-                }
-                case 'A': {
-                    change = searchCheckpoint.space.A[searchCheckpoint.step][searchCheckpoint.index];
-                    change = (change == '-')?'x':((change == 'u')?'n':'u');
-                    searchCheckpoint.space.E[searchCheckpoint.step][searchCheckpoint.index] = change;
-                    break;
-                }
-                default:
-                    return false;
-            }
-            searchCheckpoint.choice = 2;
-        } while (!searchCheckpoint.space.SPACE_CONSISTENT(searchCheckpoint.step));
-
-        HISTORY.push(searchCheckpoint);
+            if(HISTORY.empty()) return false;
+        } while (!SPACE_CONSISTENT());
     }
 
     return true;
@@ -366,7 +438,6 @@ bool SEARCH(SPACE &space) {
     while (!TEMP_SPACE.PHASE_1()) {
         while (!HISTORY.empty()) HISTORY.pop();
         TEMP_SPACE = space;
-        INCONSISTENCIES = 0;
     }
     space = TEMP_SPACE;
     return true;
